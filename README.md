@@ -26,7 +26,7 @@ git clone https://github.com/MarcoMayo/SunDevs_ProjectMOBILE
 cd SunDevs_ProjectMOBILE
 ```
 
-Running Tests
+## Running Tests
 To run the tests, use the following Gradle command:
 
 ```

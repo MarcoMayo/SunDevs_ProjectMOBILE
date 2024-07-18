@@ -1,0 +1,72 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+group 'co.com.terpel'
+version '1.0.0'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "net.serenity-bdd:serenity-gradle-plugin:2.3.31"
+        classpath "net.serenity-bdd:serenity-single-page-report:2.3.31"
+    }
+}
+
+ext{
+    serenityVersion = '3.1.16'
+    serenityCucumberVersion = '3.1.16'
+    cucumberVersion = '7.1.0'
+    log4jVersion = '2.17.1'
+}
+
+serenity {
+    reports = ["single-page-html"]
+}
+
+test {
+    testLogging.showStandardStreams = true
+    testLogging.exceptionFormat = 'full'
+    systemProperty 'properties', System.getProperty('properties')
+}
+
+tasks.withType(Test) {
+    systemProperties = System.properties
+}
+
+dependencies {
+    implementation "org.apache.logging.log4j:log4j-api:$rootProject.ext.log4jVersion"
+    implementation "org.apache.logging.log4j:log4j-core:$rootProject.ext.log4jVersion"
+    implementation "org.apache.logging.log4j:log4j-1.2-api:$rootProject.ext.log4jVersion"
+    implementation "org.apache.logging.log4j:log4j-slf4j-impl:$rootProject.ext.log4jVersion"
+    testImplementation  "junit:junit:4.12"
+    testImplementation  "org.assertj:assertj-core:1.7.0"
+
+    implementation "net.serenity-bdd:serenity-core:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-junit:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-screenplay:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-cucumber:$rootProject.ext.serenityCucumberVersion"
+    implementation "net.serenity-bdd:serenity-screenplay-rest:$rootProject.ext.serenityVersion"
+
+    implementation  "net.serenity-bdd:serenity-ensure:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-screenplay-webdriver:$rootProject.ext.serenityVersion"
+
+    implementation 'io.appium:java-client:8.0.0'
+
+}
+
+gradle.startParameter.continueOnFailure = true
+test.finalizedBy(aggregate, reports)

@@ -35,4 +35,7 @@ To run the tests, use the following Gradle command:
 
 This command will execute the tests and generate a report in target/site/serenity/index.html.
 
-
+## Videos
+- Video MOBILE: https://drive.google.com/file/d/1eZzn7Ll6m0qLxzt4VxFt2mhDOMveisXb/view?usp=sharing
+- Reporte en .ZIP: https://drive.google.com/file/d/1ZUuFAn1uf9wesRihSdIBl8gcQrnF0a8L/view?usp=sharing
+- Video presentación(Contiene ambos videos): https://drive.google.com/file/d/1ECR1m7zHMHldQ1KnaUjONNtPqqgQ0toH/view?usp=sharing
